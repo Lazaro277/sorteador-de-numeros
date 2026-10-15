@@ -1,0 +1,39 @@
+.display-large {
+  font: var(--fw-bold) var(--fs-3xl) / 130% var(--ff-sora);
+  text-transform: uppercase;
+}
+
+.display-medium {
+  font: var(--fw-bold) var(--fs-2xl) / 130% var(--ff-sora);
+  text-transform: uppercase;
+}
+
+.display-small {
+  font: var(--fw-bold) var(--fs-xl) / 130% var(--ff-sora);
+  text-transform: uppercase;
+}
+
+.overline {
+  font: var(--fw-bold) var(--fs-md) / 150% var(--ff-roboto-mono);
+  text-transform: uppercase;
+}
+
+.paragraph-large {
+  font: var(--fw-md) var(--fs-md) / 150% var(--ff-roboto-flex);
+}
+
+.paragraph-medium {
+  font: var(--fw-md) var(--fs-2sm) / 150% var(--ff-roboto-flex);
+}
+
+.paragraph-small {
+  font: var(--fw-md) var(--fs-sm) / 150% var(--ff-roboto-flex);
+}
+
+.label-medium {
+  font: var(--fw-bold) var(--fs-lg) / 150% var(--ff-roboto-flex);
+}
+
+.label-small {
+  font: var(--fw-bold) var(--fs-md) / 150% var(--ff-roboto-flex);
+}
