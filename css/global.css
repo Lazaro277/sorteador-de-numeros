@@ -52,9 +52,9 @@
   --fs-2sm: .875rem;
   --fs-md: 1rem;
   --fs-lg: 1.25rem;
-  --fs-xl: 2rem;
-  --fs-2xl: 2.5rem;
-  --fs-3xl: 4.5rem;
+  --fs-xl: 1rem;
+  --fs-2xl: 1.25rem;
+  --fs-3xl: 2.5rem;
 }
 
 html {
@@ -82,6 +82,12 @@ ul[role="list"] {
 
 @media (width >=70em) {
   :root {
-    --fs-2xl: 4.5rem;
+    --fs-sm: .75rem;
+    --fs-2sm: .875rem;
+    --fs-md: 1rem;
+    --fs-lg: 1.25rem;
+    --fs-xl: 2rem;
+    --fs-2xl: 2.5rem;
+    --fs-3xl: 4.5rem;
   }
 }

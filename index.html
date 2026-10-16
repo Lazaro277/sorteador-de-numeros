@@ -29,10 +29,39 @@
   <main class="container">
     <header>
       <p class="overline">Online - gratuito</p>
-      <h1 class="display-medium text-white">Sorteador <br>de números</h1>
+      <h1 class="display-large text-white">Sorteador <br>de números</h1>
     </header>
 
-    <section id="raffle">
+    <section id="raffle" class="py-5 mb-4">
+      <h3 class="display-medium">Quero sortear:</h3>
+      <p>Defina o intervalo e a quantidade de números, clique em "Sortear" e veja os resultados
+        na tela. É rápido e
+        fácil!</p>
+
+      <div id="drawn-numbers">
+        <form action="">
+          <div class="">
+            <label for="qty-number">Números</label>
+            <input type="text" id="qty-number">
+          </div>
+          <div class="">
+            <label for="from-number">De</label>
+            <input type="text" id="from-number">
+          </div>
+          <div class="">
+            <label for="to-number">Até</label>
+            <input type="text" id="to-number">
+          </div>
+
+          <div>
+            <button id="repeat-number"></button>
+            Não repetir número
+          </div>
+        </form>
+      </div>
+
+
+      <button id="draw-button"><span>Sortear <img src="assets/icons/next.svg" alt=""></span></button>
     </section>
 
     <section id="question">
