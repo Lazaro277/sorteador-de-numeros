@@ -10,3 +10,31 @@
   text-indent: -10000px;
   padding: 2rem;
 }
+
+@media (width >=60em) {
+  #logo {
+    background-position: left;
+    margin-top: 2rem;
+  }
+
+  main {
+    display: grid;
+    grid-template-areas:
+      "A B"
+      "C B";
+    gap: 3rem;
+    margin-top: 3rem;
+
+    &>:nth-child(1) {
+      grid-area: A;
+    }
+
+    &>:nth-child(2) {
+      grid-area: B;
+    }
+
+    &>:nth-child(3) {
+      grid-area: C;
+    }
+  }
+}

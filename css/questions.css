@@ -1,0 +1,17 @@
+#question {
+  max-width: 25rem;
+
+  span {
+    color: var(--accent-pink);
+
+    img {
+      filter: brightness(0) saturate(100%) invert(80%) sepia(33%) saturate(7118%) hue-rotate(218deg) brightness(103%) contrast(81%);
+      margin-right: .5rem;
+    }
+  }
+
+  p {
+    margin-left: 2rem;
+    color: var(--content-secondary);
+  }
+}

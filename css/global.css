@@ -68,6 +68,7 @@ html {
 body {
   background-color: var(--background-primary);
   color: white;
+  height: 100vh;
 }
 
 a {
@@ -80,5 +81,7 @@ ul[role="list"] {
 }
 
 @media (width >=70em) {
-  :root {}
+  :root {
+    --fs-2xl: 4.5rem;
+  }
 }

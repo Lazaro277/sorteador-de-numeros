@@ -27,7 +27,7 @@
 }
 
 .paragraph-small {
-  font: var(--fw-md) var(--fs-sm) / 150% var(--ff-roboto-flex);
+  font: var(--fw-base) var(--fs-sm) / 150% var(--ff-roboto-flex);
 }
 
 .label-medium {
