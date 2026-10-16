@@ -1,0 +1,9 @@
+header {
+
+  >p {
+    background-image: var(--gradient-content);
+    background-clip: unset;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
