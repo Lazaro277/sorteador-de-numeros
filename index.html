@@ -32,7 +32,7 @@
       <h1 class="display-large text-white">Sorteador <br>de números</h1>
     </header>
 
-    <section id="raffle" class="py-5 mb-4">
+    <section id="raffle" class="py-4 mb-4">
       <h3 class="display-medium">Quero sortear:</h3>
       <p>Defina o intervalo e a quantidade de números, clique em "Sortear" e veja os resultados
         na tela. É rápido e
@@ -57,24 +57,24 @@
             <div class="raffle-options">
               <label for="to-number">Até</label>
               <div class="border-input">
-                <input type="text" id="to-number" value="100">
+                <input type="text" id="to-number" value="10">
               </div>
             </div>
 
           </div>
 
           <div>
-            <button id="repeat-number"></button>
+            <button id="repeat-number" type="button"></button>
             Não repetir número
           </div>
+          <button id="draw-button" type="submit"><span>Sortear <img src="assets/icons/next.svg" alt=""></span></button>
+
         </form>
+
       </div>
-
-
-      <button id="draw-button"><span>Sortear <img src="assets/icons/next.svg" alt=""></span></button>
     </section>
 
-    <section id="question">
+    <section id="question" class="pb-4">
       <div class="mb-4">
         <span><img src="assets/icons/people-message.svg" alt="">Como funciona o sorteador de números?</span>
         <p class="paragraph-small">O sorteador utiliza um algoritmo de geração aleatória para criar números dentro do
