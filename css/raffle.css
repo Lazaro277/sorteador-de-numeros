@@ -16,6 +16,18 @@
 
     .btn-raffle {
       margin-top: auto;
+      opacity: 0;
+      animation: opacity 500ms 4.5s ease-in-out forwards;
+    }
+
+    h3 {
+      opacity: 0;
+      animation: opacity 700ms ease-in-out forwards;
+    }
+
+    p {
+      opacity: 0;
+      animation: opacity 700ms 300ms ease-in-out forwards;
     }
 
     #container-results {
@@ -30,7 +42,7 @@
         font-size: 3.5rem;
         position: relative;
         padding-bottom: .3rem;
-        animation: change-color 4s ease forwards;
+        animation: change-color 3s 1s ease forwards;
 
         &::before {
           content: '';
@@ -42,7 +54,8 @@
           left: calc(50% - 2.5rem);
           border-radius: 1.5rem;
           z-index: -1;
-          animation: scale-background 4s ease forwards, rotate-background 2s 1s ease;
+          scale: 0;
+          animation: scale-background 3s 1s ease forwards, rotate-background 2s 2s ease;
         }
       }
     }
@@ -50,6 +63,7 @@
 
 
   #raffle-default {
+    animation: default-entry 1s ease forwards;
 
     form {
 
@@ -181,21 +195,41 @@
 }
 
 
-@keyframes scale-background {
+@keyframes default-entry {
   0% {
-    scale: 0;
+    opacity: 0;
+    transform: translateX(-110%);
   }
 
-  30% {
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes opacity {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-background {
+  10% {
     scale: 1.2;
   }
 
-  50% {
+  30% {
     scale: 1;
+  }
+
+  80% {
+    scale: 1;
+    background-color: var(--accent-pink);
   }
 
   100% {
     scale: 0;
+    background-color: black;
   }
 }
 
@@ -210,7 +244,7 @@
 }
 
 @keyframes change-color {
-  50% {
+  80% {
     color: black;
   }
 
