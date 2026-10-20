@@ -9,6 +9,13 @@
   background: url(../assets/images/logo.png) no-repeat center;
   text-indent: -10000px;
   padding: 2rem;
+  cursor: pointer;
+}
+
+@media (width <60em) {
+  main {
+    max-width: 30rem !important;
+  }
 }
 
 @media (width >=60em) {
@@ -24,6 +31,7 @@
       "C B";
     gap: 3rem;
     margin-top: 3rem;
+    align-items: center;
 
     &>:nth-child(1) {
       grid-area: A;

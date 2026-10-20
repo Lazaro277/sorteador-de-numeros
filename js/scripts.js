@@ -3,10 +3,23 @@ const qtyNumberInput = document.querySelector('#qty-number');
 const fromNumberInput = document.querySelector('#from-number');
 const toNumberInput = document.querySelector('#to-number');
 const drawButton = document.querySelector('#draw-button');
+const drawNumbers = document.querySelector('#draw-numbers');
+const raffleOptions = document.querySelector('.raffle-options');
+const H3Raffle = document.querySelector('.display-medium');
+const PRaffle = document.querySelector('.display-medium +p');
 const form = document.querySelector('form');
 const inputs = document.querySelectorAll('form input')
+const logo = document.querySelector('#logo')
+const div = document.createElement('div')
 let repeatNumber = false
 let randomNumberList = []
+
+logo.onclick = function () {
+  window.location.href = 'index.html'
+}
+
+div.classList.add('hide')
+
 
 repeatButton.addEventListener('click', () => {
   //adiciona estilo quando o botão for marcado
@@ -33,6 +46,7 @@ form.addEventListener('submit', (event) => {
 
   let min = Number(fromNumberInput.value)
   let max = Number(toNumberInput.value)
+  randomNumberList = []
   //gera a quantidade de números informado pelo usuário
   for (let i = 0; i < qtyNumberInput.value; i++) {
     if (repeatNumber) {
@@ -44,7 +58,37 @@ form.addEventListener('submit', (event) => {
     }
   }
 
+  //remove numeros já sorteados da tela para sortear novamente
+  document.querySelectorAll('.radomNumberElement').forEach(element => {
+    element.remove()
+  });
+
+  //altera textos e imagens, remove alguns elementos para mostrar o resultado do sorteio
+  drawButton.querySelector('span').innerHTML = 'Sortear novamente <img src="assets/icons/draw-again.svg" alt="" class="draw-again">'
+
+  div.classList.toggle('hide')
+  document.querySelector('#raffle-default').classList.toggle('hide')
+  H3Raffle.parentElement.style.textAlign = 'center'
+  H3Raffle.textContent = 'Resultado do sorteiro'
+  PRaffle.textContent = '1° Resultado'
+  PRaffle.style.textTransform = 'uppercase'
+
+  //cria a div que exibirá o resultado e cria o numero sorteado na tela
+  div.classList.add('raffle-results')
+  randomNumberList.forEach(randomNumber => {
+    div.append(createElement(randomNumber))
+  });
+  drawNumbers.prepend(div)
+
 })
+
+//cria o elemento sorteado na tela
+function createElement(number) {
+  const span = document.createElement('span')
+  span.classList.add('radomNumberElement')
+  span.textContent = number
+  return span
+}
 
 //gera um número aleatório
 function generateRandomNumber(min, max) {

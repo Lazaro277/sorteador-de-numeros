@@ -37,3 +37,7 @@
 .label-small {
   font: var(--fw-bold) var(--fs-md) / 150% var(--ff-roboto-flex);
 }
+
+.hide {
+  display: none !important;
+}

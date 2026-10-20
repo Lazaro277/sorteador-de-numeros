@@ -38,36 +38,39 @@
         na tela. É rápido e
         fácil!</p>
 
-      <div id="drawn-numbers">
+      <div id="draw-numbers">
         <form action="">
-          <div class="d-flex justify-content-between">
+          <div id="raffle-default">
+            <div>
 
-            <div class="raffle-options">
-              <label for="qty-number">Números</label>
-              <div class="border-input">
-                <input type="text" id="qty-number" value="2">
+              <div class="raffle-options">
+                <label for="qty-number">Números</label>
+                <div class="border-input">
+                  <input type="text" id="qty-number" value="2">
+                </div>
               </div>
-            </div>
-            <div class="raffle-options">
-              <label for="from-number">De</label>
-              <div class="border-input">
-                <input type="text" id="from-number" value="1">
+              <div class="raffle-options">
+                <label for="from-number">De</label>
+                <div class="border-input">
+                  <input type="text" id="from-number" value="1">
+                </div>
               </div>
-            </div>
-            <div class="raffle-options">
-              <label for="to-number">Até</label>
-              <div class="border-input">
-                <input type="text" id="to-number" value="10">
+              <div class="raffle-options">
+                <label for="to-number">Até</label>
+                <div class="border-input">
+                  <input type="text" id="to-number" value="10">
+                </div>
               </div>
+
             </div>
 
+            <div>
+              <button id="repeat-number" type="button"></button>
+              Não repetir número
+            </div>
           </div>
-
-          <div>
-            <button id="repeat-number" type="button"></button>
-            Não repetir número
-          </div>
-          <button id="draw-button" type="submit"><span>Sortear <img src="assets/icons/next.svg" alt=""></span></button>
+          <button id="draw-button" type="submit"><span>Sortear <img src="assets/icons/next.svg" alt=""
+                class="arrow-next"></span></button>
 
         </form>
 

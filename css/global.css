@@ -80,7 +80,21 @@ ul[role="list"] {
   list-style: none;
 }
 
+@media (width >=60em) {
+  :root {
+    --fs-2xl: 1.7rem;
+    --fs-3xl: 2.5rem;
+  }
+}
+
 @media (width >=70em) {
+  :root {
+    --fs-2xl: 2rem;
+    --fs-3xl: 3.5rem;
+  }
+}
+
+@media (width >=80em) {
   :root {
     --fs-sm: .75rem;
     --fs-2sm: .875rem;

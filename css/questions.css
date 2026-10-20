@@ -15,3 +15,11 @@
     color: var(--content-secondary);
   }
 }
+
+@media (width >=60em) {
+  #question {
+    span {
+      font-size: .9rem;
+    }
+  }
+}
