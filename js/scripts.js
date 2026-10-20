@@ -10,16 +10,14 @@ const PRaffle = document.querySelector('.display-medium +p');
 const form = document.querySelector('form');
 const inputs = document.querySelectorAll('form input')
 const logo = document.querySelector('#logo')
-const div = document.createElement('div')
+const containerResults = document.querySelector('#container-results')
+const drawAgainButton = document.querySelector('#draw-again-button')
 let repeatNumber = false
 let randomNumberList = []
 
 logo.onclick = function () {
   window.location.href = 'index.html'
 }
-
-div.classList.add('hide')
-
 
 repeatButton.addEventListener('click', () => {
   //adiciona estilo quando o botão for marcado
@@ -44,6 +42,7 @@ form.addEventListener('input', () => {
 form.addEventListener('submit', (event) => {
   event.preventDefault()
 
+
   let min = Number(fromNumberInput.value)
   let max = Number(toNumberInput.value)
   randomNumberList = []
@@ -51,36 +50,39 @@ form.addEventListener('submit', (event) => {
   for (let i = 0; i < qtyNumberInput.value; i++) {
     if (repeatNumber) {
       //adiciona na lista sem repetir
-      randomNumberList.push(generateRandomNumberNoRepetition(min, max))
+      if (generateRandomNumberNoRepetition(min, max) !== null) {
+        randomNumberList.push(generateRandomNumberNoRepetition(min, max))
+      }
     } else {
       //adiciona na lista, podendo repetir
       randomNumberList.push(generateRandomNumber(min, max))
     }
   }
 
+  console.log(randomNumberList)
+
   //remove numeros já sorteados da tela para sortear novamente
   document.querySelectorAll('.radomNumberElement').forEach(element => {
     element.remove()
   });
 
-  //altera textos e imagens, remove alguns elementos para mostrar o resultado do sorteio
-  drawButton.querySelector('span').innerHTML = 'Sortear novamente <img src="assets/icons/draw-again.svg" alt="" class="draw-again">'
-
-  div.classList.toggle('hide')
+  //esconde o form de escolha do sorteio e mostra os resultados
+  document.querySelector('#raffle-results').classList.toggle('hide')
   document.querySelector('#raffle-default').classList.toggle('hide')
-  H3Raffle.parentElement.style.textAlign = 'center'
-  H3Raffle.textContent = 'Resultado do sorteiro'
-  PRaffle.textContent = '1° Resultado'
-  PRaffle.style.textTransform = 'uppercase'
 
-  //cria a div que exibirá o resultado e cria o numero sorteado na tela
-  div.classList.add('raffle-results')
+  //cria o numero sorteado na tela
   randomNumberList.forEach(randomNumber => {
-    div.append(createElement(randomNumber))
+    containerResults.append(createElement(randomNumber))
   });
-  drawNumbers.prepend(div)
 
 })
+
+
+drawAgainButton.onclick = function () {
+  //esconde os resultados e mostra as informações iniciais novamente
+  document.querySelector('#raffle-results').classList.toggle('hide')
+  document.querySelector('#raffle-default').classList.toggle('hide')
+}
 
 //cria o elemento sorteado na tela
 function createElement(number) {

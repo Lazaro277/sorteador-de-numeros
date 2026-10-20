@@ -33,14 +33,26 @@
     </header>
 
     <section id="raffle" class="py-4 mb-4">
-      <h3 class="display-medium">Quero sortear:</h3>
-      <p>Defina o intervalo e a quantidade de números, clique em "Sortear" e veja os resultados
-        na tela. É rápido e
-        fácil!</p>
+      <div id="raffle-results" class="hide">
+        <h3 class="display-medium text-center">Resultado do sorteiro</h3>
+        <p class="p-raffle text-center text-uppercase">1° Resultado</p>
 
-      <div id="draw-numbers">
-        <form action="">
-          <div id="raffle-default">
+        <div id="container-results">
+
+        </div>
+
+        <button id="draw-again-button" class="btn-raffle" type="button"><span>Sortear novamente <img
+              src="assets/icons/draw-again.svg" alt=""></span></button>
+
+      </div>
+      <div id="raffle-default" class="hides">
+        <h3 class="display-medium">Quero sortear:</h3>
+        <p>Defina o intervalo e a quantidade de números, clique em "Sortear" e veja os resultados
+          na tela. É rápido e
+          fácil!</p>
+
+        <div id="draw-numbers">
+          <form action="">
             <div>
 
               <div class="raffle-options">
@@ -68,11 +80,11 @@
               <button id="repeat-number" type="button"></button>
               Não repetir número
             </div>
-          </div>
-          <button id="draw-button" type="submit"><span>Sortear <img src="assets/icons/next.svg" alt=""
-                class="arrow-next"></span></button>
+            <button id="draw-button" class="btn-raffle" type="submit"><span>Sortear <img src="assets/icons/next.svg"
+                  alt="" class="arrow-next"></span></button>
 
-        </form>
+          </form>
+        </div>
 
       </div>
     </section>

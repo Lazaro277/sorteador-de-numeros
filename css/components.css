@@ -1,0 +1,52 @@
+.btn-raffle {
+  width: 100%;
+  color: white;
+  padding: .9rem;
+  border-radius: .6rem;
+  border: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-border);
+  background-size: 500% 500%;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    background-color: var(--background-tertiary);
+    inset: 0;
+    border-radius: .6rem;
+    z-index: 1;
+    transition: inset 250ms ease-in-out;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    z-index: 2;
+  }
+
+  &:hover {
+    animation: border-gradient 1s linear infinite;
+
+    &::after {
+      inset: 1.5px;
+      background-color: var(--background-secondary);
+    }
+
+    span {
+
+      img.arrow-next {
+        animation: arrow-next 1.5s ease-in-out infinite;
+      }
+
+      img.draw-again {
+        animation: draw-again 1.5s ease-in-out infinite;
+      }
+    }
+  }
+}
