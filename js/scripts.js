@@ -97,10 +97,14 @@ form.addEventListener('submit', (event) => {
     //passa pela lista de numeros sorteados
     for (const [index, randomNumber] of randomNumberList.entries()) {
       //animação na hora de criar os elementos
-      animateLayout(() => {
-        //cria o numero sorteado na tela
-        containerResults.append(createElement(randomNumber))
+      //cria o numero sorteado na tela
+      const newElement = createElement(randomNumber)
+
+      await animateLayout(() => {
+        containerResults.append(newElement)
       })
+
+      newElement.classList.remove('new-number')
 
       //se ainda tiver mais numeros espera 2.5s para criar o próximo
       if (index < randomNumberList.length - 1) {
@@ -124,7 +128,7 @@ drawAgainButton.onclick = function () {
 //cria o elemento sorteado na tela
 function createElement(number) {
   const span = document.createElement('span')
-  span.classList.add('radomNumberElement')
+  span.classList.add('radomNumberElement', 'new-number')
   span.textContent = number
   return span
 }
@@ -188,6 +192,10 @@ function animateLayout(updateLayout) {
       element.style.transition = 'transform 500ms ease-in-out'
       element.style.transform = ''
     })
+  })
+
+  return new Promise(resolve => {
+    setTimeout(resolve, 500)
   })
 }
 

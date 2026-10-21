@@ -87,7 +87,7 @@ ul[role="list"] {
   }
 }
 
-@media (width >=70em) {
+@media (width >=60em) {
   :root {
     --fs-2xl: 2rem;
     --fs-3xl: 3.5rem;

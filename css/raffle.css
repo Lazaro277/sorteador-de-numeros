@@ -13,9 +13,12 @@
 
   #raffle-results {
     display: flex;
-    width: 40rem;
     flex-direction: column;
     flex: 1;
+
+    @media (width >=60em) {
+      width: 40rem;
+    }
 
     .btn-raffle {
       margin-top: auto;
@@ -55,6 +58,10 @@
         position: relative;
         padding-bottom: .3rem;
         animation: change-color 2s 1s ease forwards;
+
+        .new-number {
+          opacity: 0;
+        }
 
         &::before {
           content: '';
