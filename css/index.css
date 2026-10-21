@@ -8,8 +8,9 @@
 #logo {
   background: url(../assets/images/logo.png) no-repeat center;
   text-indent: -10000px;
-  padding: 2rem;
+  margin: 2rem 0;
   cursor: pointer;
+  width: 15rem;
 }
 
 @media (width <60em) {
@@ -22,27 +23,33 @@
   #logo {
     background-position: left;
     margin-top: 2rem;
+    grid-area: L;
+
   }
 
   main {
     display: grid;
     grid-template-areas:
+      "L L"
       "A B"
       "C B";
     gap: 3rem;
-    margin-top: 3rem;
+    margin-top: 2rem;
     align-items: center;
 
-    &>:nth-child(1) {
+    &>:nth-child(2) {
       grid-area: A;
     }
 
-    &>:nth-child(2) {
+    &>:nth-child(3) {
       grid-area: B;
+      margin-left: auto;
     }
 
-    &>:nth-child(3) {
+    &>:nth-child(4) {
       grid-area: C;
+      position: absolute;
+      bottom: 3.5rem;
     }
   }
 }

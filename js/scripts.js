@@ -12,6 +12,7 @@ const inputs = document.querySelectorAll('form input')
 const logo = document.querySelector('#logo')
 const containerResults = document.querySelector('#container-results')
 const drawAgainButton = document.querySelector('#draw-again-button')
+const raffleError = document.querySelector('#raffle-error')
 let repeatNumber = false
 let randomNumberList = []
 
@@ -42,24 +43,39 @@ form.addEventListener('input', () => {
 form.addEventListener('submit', (event) => {
   event.preventDefault()
 
-
   let min = Number(fromNumberInput.value)
   let max = Number(toNumberInput.value)
+  const quantity = Number(qtyNumberInput.value)
+  const availableNumbers = max - min + 1
+
+  raffleError.textContent = ''
+
+  if (quantity < 1 || min > max) {
+    raffleError.textContent = 'Informe uma quantidade e um intervalo válidos.'
+    return
+  }
+
+  if (repeatNumber && quantity > availableNumbers) {
+    raffleError.textContent = `Você pediu ${quantity} números, mas o intervalo de ${min} a ${max} só permite ${availableNumbers} números sem repetição. Aumente o intervalo ou permita repetições.`
+    return
+  }
+
+  //faz o botao esperar todos os itens serem criados para ele aparecer
+  drawAgainButton.style.setProperty('--delay-btn-raffle', `${.5 + (2.5 * quantity)}s`)
   randomNumberList = []
   //gera a quantidade de números informado pelo usuário
-  for (let i = 0; i < qtyNumberInput.value; i++) {
+  for (let i = 0; i < quantity; i++) {
     if (repeatNumber) {
       //adiciona na lista sem repetir
-      if (generateRandomNumberNoRepetition(min, max) !== null) {
-        randomNumberList.push(generateRandomNumberNoRepetition(min, max))
+      const randomNumber = generateRandomNumberNoRepetition(min, max)
+      if (randomNumber !== null) {
+        randomNumberList.push(randomNumber)
       }
     } else {
       //adiciona na lista, podendo repetir
       randomNumberList.push(generateRandomNumber(min, max))
     }
   }
-
-  console.log(randomNumberList)
 
   //remove numeros já sorteados da tela para sortear novamente
   document.querySelectorAll('.radomNumberElement').forEach(element => {
@@ -70,10 +86,31 @@ form.addEventListener('submit', (event) => {
   document.querySelector('#raffle-results').classList.toggle('hide')
   document.querySelector('#raffle-default').classList.toggle('hide')
 
-  //cria o numero sorteado na tela
-  randomNumberList.forEach(randomNumber => {
-    containerResults.append(createElement(randomNumber))
-  });
+  //adiciona animação para quando clicar em sortear novemente
+  document.querySelector('#raffle-default').classList.add('animation-default')
+
+  //cria a espera entre a criação dos elementos
+  const wait = ms => new Promise(resolve => setTimeout(resolve, ms))
+
+  //função que mostrará os resultados criando os elementos
+  async function showResults() {
+    //passa pela lista de numeros sorteados
+    for (const [index, randomNumber] of randomNumberList.entries()) {
+      //animação na hora de criar os elementos
+      animateLayout(() => {
+        //cria o numero sorteado na tela
+        containerResults.append(createElement(randomNumber))
+      })
+
+      //se ainda tiver mais numeros espera 2.5s para criar o próximo
+      if (index < randomNumberList.length - 1) {
+        await wait(2500)
+      }
+    }
+  }
+
+  //mostra os resultados
+  showResults()
 
 })
 
@@ -114,4 +151,43 @@ function generateRandomNumberNoRepetition(min, max) {
   return randomNumber
 }
 
+//anima a cada entrada de um novo número sorteado
+function animateLayout(updateLayout) {
+  const elements = [
+    ...containerResults.children,
+    drawAgainButton
+  ]
+
+  const firstPositions = new Map()
+
+  elements.forEach(element => {
+    firstPositions.set(element, element.getBoundingClientRect())
+  })
+
+  updateLayout()
+
+  const lastPositions = new Map()
+
+  elements.forEach(element => {
+    lastPositions.set(element, element.getBoundingClientRect())
+  })
+
+  elements.forEach(element => {
+    const first = firstPositions.get(element)
+    const last = lastPositions.get(element)
+
+    if (!first || !last) return
+
+    const moveX = first.left - last.left
+    const moveY = first.top - last.top
+
+    element.style.transform = `translate(${moveX}px, ${moveY}px)`
+    element.style.transition = 'none'
+
+    requestAnimationFrame(() => {
+      element.style.transition = 'transform 500ms ease-in-out'
+      element.style.transform = ''
+    })
+  })
+}
 

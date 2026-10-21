@@ -1,6 +1,8 @@
 #raffle {
-  max-width: 30rem;
-  height: 396px;
+  max-width: 40rem;
+  min-height: 396px;
+  display: flex;
+  flex-direction: column;
 
   .p-raffle {
     color: var(--content-secondary);
@@ -11,13 +13,15 @@
 
   #raffle-results {
     display: flex;
+    width: 40rem;
     flex-direction: column;
-    height: 100%;
+    flex: 1;
 
     .btn-raffle {
       margin-top: auto;
       opacity: 0;
-      animation: opacity 500ms 4.5s ease-in-out forwards;
+      pointer-events: none;
+      animation: opacity 500ms var(--delay-btn-raffle) ease-in-out forwards;
     }
 
     h3 {
@@ -34,15 +38,23 @@
       display: flex;
       align-items: center;
       justify-content: space-evenly;
-      height: 100%;
+      flex-wrap: wrap;
+      flex: 1;
+      padding-block: 1rem;
 
       span {
         color: black;
         font-weight: 700;
         font-size: 3.5rem;
+        width: 5rem;
+        height: 5rem;
+        margin: .5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         position: relative;
         padding-bottom: .3rem;
-        animation: change-color 3s 1s ease forwards;
+        animation: change-color 2s 1s ease forwards;
 
         &::before {
           content: '';
@@ -55,7 +67,7 @@
           border-radius: 1.5rem;
           z-index: -1;
           scale: 0;
-          animation: scale-background 3s 1s ease forwards, rotate-background 2s 2s ease;
+          animation: scale-background 2s 1s ease forwards, rotate-background 1.7s 1.3s ease;
         }
       }
     }
@@ -63,7 +75,17 @@
 
 
   #raffle-default {
-    animation: default-entry 1s ease forwards;
+
+    &.animation-default {
+      animation: default-entry 1s ease forwards;
+    }
+
+    @media (width >=60em) {
+
+      &.animation-default {
+        animation: default-entry-desktop 1s ease forwards;
+      }
+    }
 
     form {
 
@@ -174,12 +196,21 @@
               transform: translate(1.125rem, -50%);
             }
           }
+
+          #raffle-error {
+            color: var(--accent-red);
+            font-size: .875rem;
+            line-height: 1.4;
+            margin: -0.5rem 0 1.5rem;
+          }
         }
       }
     }
   }
 
 }
+
+
 
 @media (width >=60em) {
   #raffle {
@@ -207,8 +238,21 @@
   }
 }
 
+@keyframes default-entry-desktop {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 @keyframes opacity {
   to {
+    pointer-events: initial;
     opacity: 1;
   }
 }

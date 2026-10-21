@@ -24,9 +24,9 @@
 </head>
 
 <body>
-  <h1 class="container" id="logo">Numbers</h1>
 
   <main class="container">
+    <h1 class="container" id="logo">Numbers</h1>
     <header>
       <p class="overline">Online - gratuito</p>
       <h1 class="display-large text-white">Sorteador <br>de números</h1>
@@ -45,7 +45,7 @@
               src="assets/icons/draw-again.svg" alt=""></span></button>
 
       </div>
-      <div id="raffle-default" class="hides">
+      <div id="raffle-default">
         <h3 class="display-medium">Quero sortear:</h3>
         <p>Defina o intervalo e a quantidade de números, clique em "Sortear" e veja os resultados
           na tela. É rápido e
@@ -80,6 +80,7 @@
               <button id="repeat-number" type="button"></button>
               Não repetir número
             </div>
+            <p id="raffle-error" role="alert" aria-live="polite"></p>
             <button id="draw-button" class="btn-raffle" type="submit"><span>Sortear <img src="assets/icons/next.svg"
                   alt="" class="arrow-next"></span></button>
 
