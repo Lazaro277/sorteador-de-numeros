@@ -61,7 +61,10 @@ form.addEventListener('submit', (event) => {
   }
 
   //faz o botao esperar todos os itens serem criados para ele aparecer
-  drawAgainButton.style.setProperty('--delay-btn-raffle', `${.5 + (2.5 * quantity)}s`)
+  drawAgainButton.style.setProperty(
+    '--delay-btn-raffle',
+    `${((quantity) * 3) + 0.5}s`
+  )
   randomNumberList = []
   //gera a quantidade de números informado pelo usuário
   for (let i = 0; i < quantity; i++) {
