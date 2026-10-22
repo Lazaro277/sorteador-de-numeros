@@ -50,13 +50,18 @@ form.addEventListener('submit', (event) => {
 
   raffleError.textContent = ''
 
+  //valida intervalo inválido
   if (quantity < 1 || min > max) {
-    raffleError.textContent = 'Informe uma quantidade e um intervalo válidos.'
+    animateLayout(() => {
+      raffleError.textContent = 'Informe uma quantidade e um intervalo válidos.'
+    })
     return
   }
 
   if (repeatNumber && quantity > availableNumbers) {
-    raffleError.textContent = `Você pediu ${quantity} números, mas o intervalo de ${min} a ${max} só permite ${availableNumbers} números sem repetição. Aumente o intervalo ou permita repetições.`
+    animateLayout(() => {
+      raffleError.textContent = `Você pediu ${quantity} números, mas o intervalo de ${min} a ${max} só permite ${availableNumbers} números sem repetição. Aumente o intervalo ou permita repetições.`
+    })
     return
   }
 
@@ -162,7 +167,8 @@ function generateRandomNumberNoRepetition(min, max) {
 function animateLayout(updateLayout) {
   const elements = [
     ...containerResults.children,
-    drawAgainButton
+    drawAgainButton,
+    drawButton
   ]
 
   const firstPositions = new Map()
