@@ -13,7 +13,7 @@ const logo = document.querySelector('#logo')
 const containerResults = document.querySelector('#container-results')
 const drawAgainButton = document.querySelector('#draw-again-button')
 const raffleError = document.querySelector('#raffle-error')
-let repeatNumber = false
+let noRepetition = false
 let randomNumberList = []
 
 logo.onclick = function () {
@@ -25,10 +25,10 @@ repeatButton.addEventListener('click', () => {
   repeatButton.classList.toggle('clicked')
 
   //verifica se ele está marcado ou não
-  if (repeatNumber) {
-    repeatNumber = false
+  if (noRepetition) {
+    noRepetition = false
   } else {
-    repeatNumber = true
+    noRepetition = true
   }
 })
 
@@ -43,22 +43,37 @@ form.addEventListener('input', () => {
 form.addEventListener('submit', (event) => {
   event.preventDefault()
 
-  let min = Number(fromNumberInput.value)
-  let max = Number(toNumberInput.value)
-  const quantity = Number(qtyNumberInput.value)
+  const minValue = fromNumberInput.value.trim()
+  const maxValue = toNumberInput.value.trim()
+  const quantityValue = qtyNumberInput.value.trim()
+
+  const min = Number(minValue)
+  const max = Number(maxValue)
+  const quantity = Number(quantityValue)
+
   const availableNumbers = max - min + 1
 
   raffleError.textContent = ''
 
-  //valida intervalo inválido
-  if (quantity < 1 || min > max) {
+  // valida os campos e o intervalo
+  if (
+    !minValue ||
+    !maxValue ||
+    !quantityValue ||
+    !Number.isSafeInteger(min) ||
+    !Number.isSafeInteger(max) ||
+    !Number.isSafeInteger(quantity) ||
+    quantity < 1 ||
+    min > max ||
+    !Number.isSafeInteger(availableNumbers)
+  ) {
     animateLayout(() => {
       raffleError.textContent = 'Informe uma quantidade e um intervalo válidos.'
     })
     return
   }
 
-  if (repeatNumber && quantity > availableNumbers) {
+  if (noRepetition && quantity > availableNumbers) {
     animateLayout(() => {
       raffleError.textContent = `Você pediu ${quantity} números, mas o intervalo de ${min} a ${max} só permite ${availableNumbers} números sem repetição. Aumente o intervalo ou permita repetições.`
     })
@@ -71,16 +86,12 @@ form.addEventListener('submit', (event) => {
     `${((quantity) * 3) + 0.5}s`
   )
   randomNumberList = []
-  //gera a quantidade de números informado pelo usuário
-  for (let i = 0; i < quantity; i++) {
-    if (repeatNumber) {
-      //adiciona na lista sem repetir
-      const randomNumber = generateRandomNumberNoRepetition(min, max)
-      if (randomNumber !== null) {
-        randomNumberList.push(randomNumber)
-      }
-    } else {
-      //adiciona na lista, podendo repetir
+
+  // gera a quantidade de números informada pelo usuário
+  if (noRepetition) {
+    randomNumberList = generateRandomNumberNoRepetition(min, max, quantity)
+  } else {
+    for (let i = 0; i < quantity; i++) {
       randomNumberList.push(generateRandomNumber(min, max))
     }
   }
@@ -147,20 +158,30 @@ function generateRandomNumber(min, max) {
 }
 
 //gera um número sem repetir
-function generateRandomNumberNoRepetition(min, max) {
-  let randomNumber
+function generateRandomNumberNoRepetition(min, max, quantity) {
+  const numbers = new Map()
+  const result = []
+  const range = max - min + 1
 
-  //se todos os números do intervalo já foram sorteados
-  if (randomNumberList.length >= (max - min + 1)) {
-    return null
+  for (let index = 0; index < quantity; index++) {
+    const randomIndex = index + Math.floor(
+      Math.random() * (range - index)
+    )
+
+    const selectedNumber = numbers.has(randomIndex)
+      ? numbers.get(randomIndex)
+      : randomIndex
+
+    const currentNumber = numbers.has(index)
+      ? numbers.get(index)
+      : index
+
+    numbers.set(randomIndex, currentNumber)
+
+    result.push(min + selectedNumber)
   }
 
-  //fica sorteando até achar algum que não foi sorteado ainda
-  do {
-    randomNumber = generateRandomNumber(min, max)
-  } while (randomNumberList.includes(randomNumber));
-
-  return randomNumber
+  return result
 }
 
 //anima a cada entrada de um novo número sorteado
